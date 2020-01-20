@@ -1,0 +1,104 @@
+branch-protection:
+  orgs:
+    cb-kubecd:
+      repos:
+        environment-pr-150-24-boot-eks-dev:
+          required_status_checks:
+            contexts:
+            - promotion-build
+        environment-pr-150-24-boot-eks-production:
+          required_status_checks:
+            contexts:
+            - promotion-build
+        environment-pr-150-24-boot-eks-staging:
+          required_status_checks:
+            contexts:
+            - promotion-build
+  protect-tested-repos: true
+deck:
+  spyglass: {}
+gerrit: {}
+owners_dir_blacklist:
+  default: null
+  repos: null
+plank: {}
+pod_namespace: jx
+postsubmits:
+  cb-kubecd/environment-pr-150-24-boot-eks-dev:
+  - agent: tekton
+    branches:
+    - master
+    context: ""
+    name: promotion
+  cb-kubecd/environment-pr-150-24-boot-eks-production:
+  - agent: tekton
+    branches:
+    - master
+    context: ""
+    name: promotion
+  cb-kubecd/environment-pr-150-24-boot-eks-staging:
+  - agent: tekton
+    branches:
+    - master
+    context: ""
+    name: promotion
+presubmits:
+  cb-kubecd/environment-pr-150-24-boot-eks-dev:
+  - agent: tekton
+    always_run: true
+    context: promotion-build
+    name: promotion-build
+    rerun_command: /test this
+    trigger: (?m)^/test( all| this),?(\s+|$)
+  cb-kubecd/environment-pr-150-24-boot-eks-production:
+  - agent: tekton
+    always_run: true
+    context: promotion-build
+    name: promotion-build
+    rerun_command: /test this
+    trigger: (?m)^/test( all| this),?(\s+|$)
+  cb-kubecd/environment-pr-150-24-boot-eks-staging:
+  - agent: tekton
+    always_run: true
+    context: promotion-build
+    name: promotion-build
+    rerun_command: /test this
+    trigger: (?m)^/test( all| this),?(\s+|$)
+prowjob_namespace: jx
+push_gateway: {}
+sinker: {}
+tide:
+  context_options:
+    from-branch-protection: true
+    required-if-present-contexts: []
+    skip-unknown-contexts: false
+  merge_method:
+    cb-kubecd/environment-pr-150-24-boot-eks-dev: merge
+    cb-kubecd/environment-pr-150-24-boot-eks-production: merge
+    cb-kubecd/environment-pr-150-24-boot-eks-staging: merge
+  queries:
+  - labels:
+    - approved
+    missingLabels:
+    - do-not-merge
+    - do-not-merge/hold
+    - do-not-merge/work-in-progress
+    - needs-ok-to-test
+    - needs-rebase
+    repos:
+    - cb-kubecd/environment-pr-150-24-boot-eks-dev
+    - cb-kubecd/environment-pr-150-24-boot-eks-production
+    - cb-kubecd/environment-pr-150-24-boot-eks-staging
+  - labels:
+    - updatebot
+    missingLabels:
+    - do-not-merge
+    - do-not-merge/hold
+    - do-not-merge/work-in-progress
+    - needs-ok-to-test
+    - needs-rebase
+    repos:
+    - cb-kubecd/environment-pr-150-24-boot-eks-dev
+    - cb-kubecd/environment-pr-150-24-boot-eks-production
+    - cb-kubecd/environment-pr-150-24-boot-eks-staging
+  target_url: http://deck-jx.34.206.58.205.nip.io
