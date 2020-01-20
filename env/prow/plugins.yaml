@@ -1,0 +1,91 @@
+approve:
+- lgtm_acts_as_approve: true
+  repos:
+  - cb-kubecd/environment-pr-150-24-boot-eks-dev
+  require_self_approval: true
+- lgtm_acts_as_approve: true
+  repos:
+  - cb-kubecd/environment-pr-150-24-boot-eks-production
+  require_self_approval: true
+- lgtm_acts_as_approve: true
+  repos:
+  - cb-kubecd/environment-pr-150-24-boot-eks-staging
+  require_self_approval: true
+blunderbuss: {}
+cat: {}
+cherry_pick_unapproved: {}
+config_updater:
+  maps:
+    env/prow/config.yaml:
+      name: config
+    env/prow/plugins.yaml:
+      name: plugins
+heart: {}
+owners: {}
+plugins:
+  cb-kubecd/environment-pr-150-24-boot-eks-dev:
+  - config-updater
+  - approve
+  - assign
+  - blunderbuss
+  - help
+  - hold
+  - lgtm
+  - lifecycle
+  - size
+  - trigger
+  - wip
+  - heart
+  - cat
+  - override
+  - dog
+  - pony
+  cb-kubecd/environment-pr-150-24-boot-eks-production:
+  - config-updater
+  - approve
+  - assign
+  - blunderbuss
+  - help
+  - hold
+  - lgtm
+  - lifecycle
+  - size
+  - trigger
+  - wip
+  - heart
+  - cat
+  - override
+  - dog
+  - pony
+  cb-kubecd/environment-pr-150-24-boot-eks-staging:
+  - config-updater
+  - approve
+  - assign
+  - blunderbuss
+  - help
+  - hold
+  - lgtm
+  - lifecycle
+  - size
+  - trigger
+  - wip
+  - heart
+  - cat
+  - override
+  - dog
+  - pony
+requiresig: {}
+sigmention: {}
+slack: {}
+triggers:
+- repos:
+  - cb-kubecd/environment-pr-150-24-boot-eks-dev
+  trusted_org: cb-kubecd
+- repos:
+  - cb-kubecd/environment-pr-150-24-boot-eks-production
+  trusted_org: cb-kubecd
+- repos:
+  - cb-kubecd/environment-pr-150-24-boot-eks-staging
+  trusted_org: cb-kubecd
+welcome:
+- message_template: Welcome
